@@ -5,8 +5,7 @@
    "scripts": {
       "dev": "next dev --turbopack",
       "build": "next build",
-      "start": "npm run seed && next start",
-      "start:prod": "npm run seed && node server.js",
+      "start": "next start",
       "lint": "next lint",
       "seed": "npx tsx src/Database/seeders/index.ts",
       "seed:roles": "npx tsx src/Database/seeders/roleSeeder.ts",
@@ -42,6 +41,7 @@
       "eslint": "^9",
       "eslint-config-next": "15.4.5",
       "tailwindcss": "^4",
+      "tsx": "^4.20.4",
       "typescript": "^5"
    }
 }

@@ -46,9 +46,6 @@ RUN chown nextjs:nodejs .next
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# Copy startup script
-COPY --from=builder --chown=nextjs:nodejs /app/scripts/startup.sh ./startup.sh
-
 USER nextjs
 
 EXPOSE 3000
@@ -57,5 +54,6 @@ ENV PORT=3000
 # set hostname to localhost
 ENV HOSTNAME="0.0.0.0"
 
-# Use the startup script instead of directly running server.js
-CMD ["./startup.sh"] 
+# server.js is created by next build from the standalone output
+# https://nextjs.org/docs/pages/api-reference/next-config-js/output
+CMD ["node", "server.js"] 
