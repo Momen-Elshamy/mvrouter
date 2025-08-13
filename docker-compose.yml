@@ -27,7 +27,6 @@ services:
          # Application Settings
          - NEXT_TELEMETRY_DISABLED=1
          - HOSTNAME=0.0.0.0
-         - AUTO_SEED=true
 
          # Optional: Logging
          - LOG_LEVEL=${LOG_LEVEL:-info}

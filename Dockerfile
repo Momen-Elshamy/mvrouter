@@ -46,14 +46,8 @@ RUN chown nextjs:nodejs .next
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# Copy source files needed for seeding
-COPY --from=builder --chown=nextjs:nodejs /app/src/Database ./src/Database
-COPY --from=builder --chown=nextjs:nodejs /app/src/lib/database ./src/lib/database
-COPY --from=builder --chown=nextjs:nodejs /app/src/config ./src/config
-COPY --from=builder --chown=nextjs:nodejs /app/package.json ./
-
 # Copy startup script
-COPY --from=builder --chown=nextjs:nodejs /app/startup-simple.js ./
+COPY --from=builder --chown=nextjs:nodejs /app/scripts/startup.sh ./startup.sh
 
 USER nextjs
 
@@ -63,5 +57,5 @@ ENV PORT=3000
 # set hostname to localhost
 ENV HOSTNAME="0.0.0.0"
 
-# Use startup script
-CMD ["node", "startup-simple.js"] 
+# Use the startup script instead of directly running server.js
+CMD ["./startup.sh"] 
