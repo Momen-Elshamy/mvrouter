@@ -53,7 +53,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/src/config ./src/config
 COPY --from=builder --chown=nextjs:nodejs /app/package.json ./
 
 # Copy startup script
-COPY --from=builder --chown=nextjs:nodejs /app/startup.sh ./
+COPY --from=builder --chown=nextjs:nodejs /app/startup-simple.js ./
 
 USER nextjs
 
@@ -63,5 +63,5 @@ ENV PORT=3000
 # set hostname to localhost
 ENV HOSTNAME="0.0.0.0"
 
-# Use startup script instead of directly starting the server
-CMD ["./startup.sh"] 
+# Use startup script
+CMD ["node", "startup-simple.js"] 
