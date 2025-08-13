@@ -46,6 +46,15 @@ RUN chown nextjs:nodejs .next
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
+# Copy source files needed for seeding
+COPY --from=builder --chown=nextjs:nodejs /app/src/Database ./src/Database
+COPY --from=builder --chown=nextjs:nodejs /app/src/lib/database ./src/lib/database
+COPY --from=builder --chown=nextjs:nodejs /app/src/config ./src/config
+COPY --from=builder --chown=nextjs:nodejs /app/package.json ./
+
+# Copy startup script
+COPY --from=builder --chown=nextjs:nodejs /app/startup.sh ./
+
 USER nextjs
 
 EXPOSE 3000
@@ -54,6 +63,5 @@ ENV PORT=3000
 # set hostname to localhost
 ENV HOSTNAME="0.0.0.0"
 
-# server.js is created by next build from the standalone output
-# https://nextjs.org/docs/pages/api-reference/next-config-js/output
-CMD ["node", "server.js"] 
+# Use startup script instead of directly starting the server
+CMD ["./startup.sh"] 

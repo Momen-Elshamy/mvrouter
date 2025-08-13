@@ -1,0 +1,40 @@
+2025-08-13 14:35:32 info: Congratulations, your extension "Embold" is now active!
+2025-08-13 14:35:32 info: ************* init ****************
+2025-08-13 14:35:32 info: tempDirectory : /Users/momenelshamy/.cursor/extensions/embold-vscode.embold-0.3.0/temp
+2025-08-13 14:35:33 error: SQLITE_ERROR: no such table: issues
+2025-08-13 14:35:33 error: SQLITE_ERROR: no such table: issues
+2025-08-13 14:35:33 info: Extraction complete for source: /Users/momenelshamy/.cursor/extensions/embold-vscode.embold-0.3.0/resources/embold-scanner-archive.zip, destination: /Users/momenelshamy/.cursor/extensions/embold-vscode.embold-0.3.0/temp
+2025-08-13 14:35:33 info: Extension installed on machine OS : darwin
+2025-08-13 14:35:33 info: Fetched the issues from DB
+2025-08-13 14:35:33 info: Embold extension version response:{"hasSupport":false,"version":"0.2.1","changeNotes":"<div> <p>Release Date: 30 Apr, 2025 <br><span>Bug fixes and improvements.</span></p> </div>"}
+2025-08-13 14:35:33 info: Current installed embold extension version : 0.3.0
+2025-08-13 14:35:33 info: Latest embold extension version on marketplace : 0.2.1
+2025-08-13 14:35:33 info: Current extension version: 0.3.0
+2025-08-13 14:35:33 info: Stored extension version: 0.3.0
+2025-08-13 14:35:33 info: No new installation or upgrade detected. Skipping plugin activation tracking.
+2025-08-13 14:35:33 info: Java version installed on machine : 
+openjdk version "19.0.1" 2022-10-18
+OpenJDK Runtime Environment Temurin-19.0.1+10 (build 19.0.1+10)
+OpenJDK 64-Bit Server VM Temurin-19.0.1+10 (build 19.0.1+10, mixed mode)
+
+2025-08-13 14:35:33 info: Java installed on machine.
+2025-08-13 14:35:39 info: Row(s) deleted
+2025-08-13 14:35:53 info: Row(s) deleted
+2025-08-13 14:37:52 info: Congratulations, your extension "Embold" is now active!
+2025-08-13 14:37:52 info: ************* init ****************
+2025-08-13 14:37:52 info: tempDirectory : /Users/momenelshamy/.cursor/extensions/embold-vscode.embold-0.3.0/temp
+2025-08-13 14:37:53 info: Extraction complete for source: /Users/momenelshamy/.cursor/extensions/embold-vscode.embold-0.3.0/resources/embold-scanner-archive.zip, destination: /Users/momenelshamy/.cursor/extensions/embold-vscode.embold-0.3.0/temp
+2025-08-13 14:37:53 info: Extension installed on machine OS : darwin
+2025-08-13 14:37:53 info: Fetched the issues from DB
+2025-08-13 14:37:54 info: Java version installed on machine : 
+openjdk version "19.0.1" 2022-10-18
+OpenJDK Runtime Environment Temurin-19.0.1+10 (build 19.0.1+10)
+OpenJDK 64-Bit Server VM Temurin-19.0.1+10 (build 19.0.1+10, mixed mode)
+
+2025-08-13 14:37:54 info: Java installed on machine.
+2025-08-13 14:37:54 info: Embold extension version response:{"hasSupport":false,"version":"0.2.1","changeNotes":"<div> <p>Release Date: 30 Apr, 2025 <br><span>Bug fixes and improvements.</span></p> </div>"}
+2025-08-13 14:37:54 info: Current installed embold extension version : 0.3.0
+2025-08-13 14:37:54 info: Latest embold extension version on marketplace : 0.2.1
+2025-08-13 14:37:54 info: Current extension version: 0.3.0
+2025-08-13 14:37:54 info: Stored extension version: 0.3.0
+2025-08-13 14:37:54 info: No new installation or upgrade detected. Skipping plugin activation tracking.
