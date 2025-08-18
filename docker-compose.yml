@@ -1,52 +1,52 @@
-version: '3.8'
+version: "3.8"
 
 services:
-  hive-router:
-    image: amreldessouki25/hive-router:0.0.1
-    ports:
-      - "3000:3000"
-    environment:
-      # Application Environment
-      - NODE_ENV=production
-      - PORT=3000
-      
-      # NextAuth Configuration
-      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
-      - NEXTAUTH_URL=${NEXTAUTH_URL}
-      
-      # Database Configuration
-      - MONGODB_URI=${MONGODB_URI}
-      
-      # API Keys
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
-      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
-      - PROVIDER_API_KEY_OPENAI=${PROVIDER_API_KEY_OPENAI}
-      - PROVIDER_API_KEY_GEMINI=${PROVIDER_API_KEY_GEMINI}
-      
-      # Application Settings
-      - NEXT_TELEMETRY_DISABLED=1
-      - HOSTNAME=0.0.0.0
-      
-      # Optional: Logging
-      - LOG_LEVEL=${LOG_LEVEL:-info}
-      
-      # Optional: Performance
-      - MAX_CONCURRENT_REQUESTS=${MAX_CONCURRENT_REQUESTS:-100}
-      - REQUEST_TIMEOUT=${REQUEST_TIMEOUT:-30000}
-      
-      # Optional: Security
-      - CORS_ORIGIN=${CORS_ORIGIN:-*}
-      - RATE_LIMIT_WINDOW=${RATE_LIMIT_WINDOW:-900000}
-      - RATE_LIMIT_MAX=${RATE_LIMIT_MAX:-100}
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/api/auth/me"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-    labels:
-      - "com.hive-router.description=Hive Router API Service"
-      - "com.hive-router.version=1.0.0"
-      - "com.hive-router.maintainer=amreldessoukiad@gmail.com" 
+   hive-router:
+      image: amreldessouki25/hive-router:0.0.1
+      ports:
+         - "3000:3000"
+      environment:
+         # Application Environment
+         - NODE_ENV=production
+         - PORT=3000
+
+         # NextAuth Configuration
+         - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+         - NEXTAUTH_URL=${NEXTAUTH_URL}
+
+         # Database Configuration
+         - MONGODB_URI=${MONGODB_URI}
+
+         # API Keys
+         - OPENAI_API_KEY=${OPENAI_API_KEY}
+         - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+         - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+         - PROVIDER_API_KEY_OPENAI=${PROVIDER_API_KEY_OPENAI}
+         - PROVIDER_API_KEY_GEMINI=${PROVIDER_API_KEY_GEMINI}
+
+         # Application Settings
+         - NEXT_TELEMETRY_DISABLED=1
+         - HOSTNAME=0.0.0.0
+
+         # Optional: Logging
+         - LOG_LEVEL=${LOG_LEVEL:-info}
+
+         # Optional: Performance
+         - MAX_CONCURRENT_REQUESTS=${MAX_CONCURRENT_REQUESTS:-100}
+         - REQUEST_TIMEOUT=${REQUEST_TIMEOUT:-30000}
+
+         # Optional: Security
+         - CORS_ORIGIN=${CORS_ORIGIN:-*}
+         - RATE_LIMIT_WINDOW=${RATE_LIMIT_WINDOW:-900000}
+         - RATE_LIMIT_MAX=${RATE_LIMIT_MAX:-100}
+      restart: unless-stopped
+      healthcheck:
+         test: ["CMD", "curl", "-f", "http://localhost:3000/api/auth/me"]
+         interval: 30s
+         timeout: 10s
+         retries: 3
+         start_period: 40s
+      labels:
+         - "com.hive-router.description=Hive Router API Service"
+         - "com.hive-router.version=1.0.0"
+         - "com.hive-router.maintainer=amreldessoukiad@gmail.com"
