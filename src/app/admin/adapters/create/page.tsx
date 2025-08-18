@@ -365,15 +365,28 @@ export default function CreateAdapter() {
 
     // Extract body
     if (params.body && params.body.data) {
-      Object.entries(params.body.data).forEach(([key, value]: [string, any]) => {
-        structure.body.push({
-          name: key,
-          type: normalizeType(value.type || typeof value),
-          path: `body.data.${key}`,
-          required: value.required,
-          description: value.description
+      // Handle both array and object formats
+      if (Array.isArray(params.body.data)) {
+        params.body.data.forEach((value: any, index: number) => {
+          structure.body.push({
+            name: value.name || `param_${index}`,
+            type: normalizeType(value.type || typeof value),
+            path: `body.data.${value.name || index}`,
+            required: value.required,
+            description: value.description
+          });
         });
-      });
+      } else {
+        Object.entries(params.body.data).forEach(([key, value]: [string, any]) => {
+          structure.body.push({
+            name: key,
+            type: normalizeType(value.type || typeof value),
+            path: `body.data.${key}`,
+            required: value.required,
+            description: value.description
+          });
+        });
+      }
     }
 
     // Extract query

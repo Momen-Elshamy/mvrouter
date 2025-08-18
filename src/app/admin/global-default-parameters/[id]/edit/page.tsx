@@ -109,13 +109,24 @@ export default function EditGlobalDefaultParameter({ params }: { params: Promise
           if (params.body) {
             setBodyType(params.body.type || 'json');
             if (params.body.data) {
-              setBodyData(Object.entries(params.body.data).map(([name, param]: [string, any]) => ({
-                name,
-                type: param.type,
-                required: param.required,
-                placeholder: param.placeholder,
-                description: param.description
-              })));
+              // Handle both array and object formats
+              if (Array.isArray(params.body.data)) {
+                setBodyData(params.body.data.map((param: any) => ({
+                  name: param.name,
+                  type: param.type,
+                  required: param.required,
+                  placeholder: param.placeholder,
+                  description: param.description
+                })));
+              } else {
+                setBodyData(Object.entries(params.body.data).map(([name, param]: [string, any]) => ({
+                  name,
+                  type: param.type,
+                  required: param.required,
+                  placeholder: param.placeholder,
+                  description: param.description
+                })));
+              }
             }
           }
 
@@ -260,7 +271,13 @@ export default function EditGlobalDefaultParameter({ params }: { params: Promise
         headers: headers.reduce((acc, param) => ({ ...acc, [param.name]: param }), {}),
         body: {
           type: bodyType,
-          data: bodyData.reduce((acc, param) => ({ ...acc, [param.name]: param }), {})
+          data: bodyData.map(param => ({
+            name: param.name,
+            type: param.type,
+            required: param.required,
+            placeholder: param.placeholder || '',
+            description: param.description || ''
+          }))
         },
         query: queryParams.reduce((acc, param) => ({ ...acc, [param.name]: param }), {}),
         parameters: urlParams.reduce((acc, param) => ({ ...acc, [param.name]: param }), {})

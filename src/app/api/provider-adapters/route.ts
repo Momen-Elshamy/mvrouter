@@ -39,20 +39,22 @@ export async function GET(request: NextRequest) {
       isActive: true 
     });
 
-    const formattedAdapters = adapters.map(adapter => ({
-      _id: (adapter._id as any).toString(),
-      name: adapter.name,
-      description: adapter.description,
-      userId: (adapter.userId as any).toString(),
-      defaultParameterId: (adapter.defaultParameterId as any).toString(),
-      providerEndpointId: (adapter.providerEndpointId as any).toString(),
-      mappings: adapter.mappings,
-      isActive: adapter.isActive,
-      createdAt: adapter.createdAt.toISOString(),
-      updatedAt: adapter.updatedAt.toISOString(),
-      defaultParameter: adapter.defaultParameterId,
-      providerEndpoint: adapter.providerEndpointId
-    }));
+    const formattedAdapters = adapters
+      .filter(adapter => adapter.defaultParameterId && adapter.providerEndpointId) // Filter out orphaned records
+      .map(adapter => ({
+        _id: (adapter._id as any).toString(),
+        name: adapter.name,
+        description: adapter.description,
+        userId: adapter.userId ? (adapter.userId as any).toString() : null,
+        defaultParameterId: adapter.defaultParameterId ? (adapter.defaultParameterId as any).toString() : null,
+        providerEndpointId: adapter.providerEndpointId ? (adapter.providerEndpointId as any).toString() : null,
+        mappings: adapter.mappings,
+        isActive: adapter.isActive,
+        createdAt: adapter.createdAt.toISOString(),
+        updatedAt: adapter.updatedAt.toISOString(),
+        defaultParameter: adapter.defaultParameterId,
+        providerEndpoint: adapter.providerEndpointId
+      }));
 
     return NextResponse.json({
       success: true,
@@ -69,6 +71,10 @@ export async function GET(request: NextRequest) {
 
   } catch (error) {
     console.error('Error fetching adapters:', error);
+    console.error('Error details:', {
+      message: error instanceof Error ? error.message : 'Unknown error',
+      stack: error instanceof Error ? error.stack : undefined
+    });
     return NextResponse.json(
       { success: false, message: 'Internal server error' },
       { status: 500 }
@@ -126,11 +132,20 @@ export async function POST(request: NextRequest) {
       const requiredFields: string[] = [];
       
       if (params.body?.data) {
-        Object.entries(params.body.data).forEach(([key, value]: [string, any]) => {
-          if (value.required) {
-            requiredFields.push(`body.data.${key}`);
-          }
-        });
+        // Handle both array and object formats
+        if (Array.isArray(params.body.data)) {
+          params.body.data.forEach((value: any, index: number) => {
+            if (value.required) {
+              requiredFields.push(`body.data.${value.name || index}`);
+            }
+          });
+        } else {
+          Object.entries(params.body.data).forEach(([key, value]: [string, any]) => {
+            if (value.required) {
+              requiredFields.push(`body.data.${key}`);
+            }
+          });
+        }
       }
       
       if (params.headers) {
